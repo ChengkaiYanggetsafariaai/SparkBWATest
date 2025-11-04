@@ -1,4 +1,6 @@
-docker run -it --name sparkbwa_1 \
+docker buildx build --platform=linux/amd64 -t jdk8-hadoop2.7-spark2.4 .
+
+docker run -it --name sparkbwa_2 \
   -p 50070:50070 \
   -p 8088:8088 \
   -p 4040:4040 \

@@ -11,9 +11,16 @@ ENV SCALA_VERSION=2.11.12 \
     HADOOP_HOME=/opt/hadoop \
     SPARK_HOME=/opt/spark \
     MAVEN_OPTS="-Xms256m -Xmx1024m"
+# export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+# export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+# export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 ENV PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SPARK_HOME/bin:$SPARK_HOME/sbin
-
+# 编译所需工具与头文件
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential make zlib1g-dev libbz2-dev liblzma-dev \
+ && rm -rf /var/lib/apt/lists/*
+ 
 # System packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget curl ssh pdsh rsync net-tools iputils-ping procps vim less ca-certificates \
